@@ -9,10 +9,11 @@ public class MovementData : ScriptableObject
 	public LayerMask wallsLayer;
 	public bool canMove = true;
 
+
 	[Header("AI:")]
 	public bool isAi;
 	public float chance;
-	public float Colldown = 0;
+	public float cooldown = 0;
 }
 
 
@@ -21,6 +22,7 @@ public class MovementData : ScriptableObject
 public class BombData : ScriptableObject
 {
 	public float cooldown;
+	public float bombTimer;
 	public GameObject bomb { get; set; }
 
 	[Header("Ai:")]

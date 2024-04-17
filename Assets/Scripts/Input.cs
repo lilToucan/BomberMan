@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Mover
 {
@@ -36,6 +38,25 @@ public class Mover
 
 }
 
+public class Bomber
+{
+	public Iinput input;
+	public Action onDroppingBomb;
+	public bool canBomb;
+
+	public Bomber(Iinput input)
+	{
+		this.input = input;
+	}
+
+	public void Tick()
+	{
+		if (input.dropBomb && canBomb)
+		{
+			onDroppingBomb?.Invoke();
+		}
+	}
+}
 public interface Iinput
 {
 	public int moveX { get; set; }
@@ -53,6 +74,7 @@ public class AiInput : Iinput
 	public int moveY { get; set; }
 	public float bombChance;
 	public bool dropBomb { get; set; }
+
 
 	public void BombInput()
 	{

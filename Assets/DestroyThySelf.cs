@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyThySelf : MonoBehaviour
+public class DestroyThySelf : MonoBehaviour, IHp
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Death()
     {
-        
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDmg()
     {
-        
+        Death();
     }
 }

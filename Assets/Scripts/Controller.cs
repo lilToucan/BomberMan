@@ -1,23 +1,33 @@
-
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
 	public MovementData moveData;
 	public BombData bombData;
-	public Iinput input;
+	public IInput input;
 	public Mover mover;
 	public Bomber bomber;
 
+	public string MoveAnim;
+	public SpriteRenderer myRenderer;
+	public Animator myAnim;
 
-
-	private void Start()
+	private void Awake()
 	{
-		input = moveData.isAi ? new AiInput() : new PlayerInput();
-		mover = new Mover(input, moveData, transform);
+		input = moveData.isAi ? new AiInput(bombData.chance, moveData) : new PlayerInput();
+		mover = new Mover(input, moveData, transform, MoveAnim, myRenderer, myAnim);
 		bomber = new Bomber(input);
+	}
+
+	private void OnEnable()
+	{
+		bomber.onDroppingBomb += OnBomb;
+	}
+	private void OnDisable()
+	{
+		bomber.onDroppingBomb -= OnBomb;
 	}
 
 	private void Update()
@@ -34,7 +44,6 @@ public class PlayerController : MonoBehaviour
 		Instantiate(bombData.bomb, transform.position, quaternion.identity);
 		StartCoroutine(BombCooldown());
 	}
-
 
 	IEnumerator BombCooldown()
 	{

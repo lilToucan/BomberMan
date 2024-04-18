@@ -1,5 +1,6 @@
 using Action = System.Action;
 using UnityEngine;
+using System;
 
 //* ALL MY SCRIPTABLE OBJECTS RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
 
@@ -39,4 +40,23 @@ public class BombAction : ScriptableObject
 
 
 }
+
+
+public class ActionData<T> : ScriptableObject
+{
+	public Action<T> onActivation;
+}
+
+[CreateAssetMenu(fileName = "BoolAction", menuName = "scriptables/Actions/Bool")]
+public class ActionBool : ActionData<bool>
+{
+
+}
+
+[CreateAssetMenu(fileName = "BoolAction", menuName = "scriptables/Actions/Bool")]
+public class ActionInt : ActionData<int>
+{
+
+}
+
 

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec86ee53eb8b244b85e99c02ed113af, type: 3}
+  m_Name: PlayerBombAction
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 725663252738505618, guid: af892459a209c0042b8ac5173f7b1861, type: 3}

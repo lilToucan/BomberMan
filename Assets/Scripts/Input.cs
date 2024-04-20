@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public interface IHp
 {
 	public void TakeDmg();
@@ -34,7 +35,7 @@ public class Mover
 		Vector2 pos = Vector2.zero;
 		if (input.moveX != 0)
 		{
-			renderer.flipX = input.moveX > 0 ? false : true;
+			renderer.flipX = input.moveX <= 0;
 			anim.CrossFade(moveAnim, 0.2f);
 			if (!Physics.Raycast(transformToMove.position, Vector2.right * input.moveX, 1, moveData.wallsLayer))
 			{
@@ -159,16 +160,15 @@ public class PlayerInput : IInput
 
 public class Bomb
 {
-	public BombAction bombAction;
 	public BombData bombData;
 	public Transform trans;
 	protected List<Collider> collidersHit = new List<Collider>();
 	protected float timer = 0;
 
 
-	public Bomb(BombAction bombAction, BombData bombData, Transform pos)
+	public Bomb(BombData bombData, Transform pos)
 	{
-		this.bombAction = bombAction;
+
 		this.bombData = bombData;
 		this.trans = pos;
 		this.timer = 0;
@@ -193,9 +193,8 @@ public class Bomb
 
 public class BombCross : Bomb
 {
-	public BombCross(BombAction bombAction, BombData bombData, Transform pos) : base(bombAction, bombData, pos)
+	public BombCross(BombData bombData, Transform pos) : base(bombData, pos)
 	{
-		this.bombAction = bombAction;
 		this.bombData = bombData;
 		this.trans = pos;
 		this.timer = 0;
@@ -209,6 +208,7 @@ public class BombCross : Bomb
 
 	public override void Explode()
 	{
+
 		Collider[] collidersX = Physics.OverlapBox(trans.position /*right here*/, Vector2.right * bombData.rangeX, quaternion.Euler(Vector3.zero), bombData.doNotHit);
 		Collider[] collidersY = Physics.OverlapBox(trans.position /*right here2*/, Vector2.up * bombData.rangeY, quaternion.Euler(Vector3.zero), bombData.doNotHit);
 		collidersHit.AddRange(collidersX);

@@ -1,12 +1,11 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	static public ActionData<bool> PlayerDeath;
-	static public ActionData<bool> EnemyDeath;
-	static public ActionData<int> EnemySpawn;
+	public ActionBool PlayerDeath;
+	public ActionBool EnemyDeath;
+	public ActionBool EnemySpawn;
 
 
 	[SerializeField] int LoseSceneNum;
@@ -19,23 +18,30 @@ public class GameManager : MonoBehaviour
 	{
 		PlayerDeath.onActivation += Lose;
 		EnemyDeath.onActivation += EnemyKilled;
-		EnemySpawn.onActivation?.Invoke(EnemiesToKill);
+		EnemySpawn.onActivation += OnEnemySpawn;
+		EnemySpawn.onActivation?.Invoke(true);
 	}
+
 
 	void Lose(bool x)
 	{
 		SceneManager.LoadScene(LoseSceneNum);
 	}
 
+	void OnEnemySpawn(bool x)
+	{
+		EnemiesToKill++;
+	}
+
 	void EnemyKilled(bool x)
 	{
 		EnemiesKilled++;
-
 		if (EnemiesKilled >= EnemiesToKill)
 		{
 			Win();
 		}
 	}
+
 	void Win()
 	{
 		SceneManager.LoadScene(WinSceneNum);

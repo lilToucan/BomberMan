@@ -16,7 +16,7 @@ public class Controller : MonoBehaviour
 
 	private void Awake()
 	{
-		input = moveData.isAi ? new AiInput(bombData.chance, moveData) : new PlayerInput();
+		input = moveData.isAi ? new AiInput(bombData.chance) : new PlayerInput();
 		mover = new Mover(input, moveData, transform, MoveAnim, myRenderer, myAnim);
 		bomber = new Bomber(input);
 	}

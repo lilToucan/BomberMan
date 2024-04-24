@@ -16,4 +16,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   isAi: 0
-  cooldown: 0
+  cooldown: 0.05

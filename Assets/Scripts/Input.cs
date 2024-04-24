@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -28,6 +27,9 @@ public class Mover
 		this.moveAnim = moveAnim;
 		this.renderer = renderer;
 		this.anim = anim;
+		input.timer = 0;
+		input.moveData = moveData;
+
 	}
 
 	public void Tick()
@@ -37,21 +39,35 @@ public class Mover
 		{
 			renderer.flipX = input.moveX <= 0;
 			anim.CrossFade(moveAnim, 0.2f);
-			if (!Physics.Raycast(transformToMove.position, Vector2.right * input.moveX, 1, moveData.wallsLayer))
+			Debug.DrawRay(transformToMove.position, Vector2.right * input.moveX, Color.cyan, 1f);
+			if (Physics2D.Raycast(transformToMove.position, Vector2.right * input.moveX, 1, moveData.wallsLayer) == false)
 			{
+				Debug.Log("uwu");
 				pos = Vector2.right * input.moveX;
-				transformToMove.position = pos;
+
+			}
+			else
+			{
+				Debug.Log("gugugaga");
 			}
 		}
 		else if (input.moveY != 0)
 		{
 			anim.CrossFade(moveAnim, 0.2f);
-			if (!Physics.Raycast(transformToMove.position, Vector2.up * input.moveY, 1, moveData.wallsLayer))
+			Debug.DrawRay(transformToMove.position, Vector2.up * input.moveY, Color.cyan, 1f);
+			if (Physics2D.Raycast(transformToMove.position, Vector2.up * input.moveY, 1, moveData.wallsLayer) == false)
 			{
-				pos = Vector2.right * input.moveX;
-				transformToMove.position = pos;
+				Debug.Log("diomerda " + input.moveY);
+				pos = Vector2.up * input.moveY;
+			}
+			else
+			{
+				Debug.Log("gugugaga2 THE REVENGE OF THE 6TH");
 			}
 		}
+		transformToMove.Translate(pos);
+		// input.moveX = 0;
+		// input.moveY = 0;
 	}
 
 }
@@ -77,9 +93,11 @@ public class Bomber
 }
 public interface IInput
 {
-	public int moveX { get; set; }
-	public int moveY { get; set; }
+	public float moveX { get; set; }
+	public float moveY { get; set; }
 	public bool dropBomb { get; set; }
+	public float timer { get; set; }
+	public MovementData moveData { get; set; }
 
 
 	public void MoveInput();
@@ -88,18 +106,17 @@ public interface IInput
 
 public class AiInput : IInput
 {
-	public int moveX { get; set; }
-	public int moveY { get; set; }
+	public float moveX { get; set; }
+	public float moveY { get; set; }
 	public float bombChance;
 	public bool dropBomb { get; set; }
-	public float timer = 0;
-	public MovementData moveData;
+	public float timer { get; set; }
+	public MovementData moveData { get; set; }
 
 
-	public AiInput(float bombChance, MovementData moveData)
+	public AiInput(float bombChance)
 	{
 		this.bombChance = bombChance;
-		this.moveData = moveData;
 	}
 
 	public void BombInput()
@@ -135,9 +152,11 @@ public class AiInput : IInput
 
 public class PlayerInput : IInput
 {
-	public int moveX { get; set; }
-	public int moveY { get; set; }
+	public float moveX { get; set; }
+	public float moveY { get; set; }
 	public bool dropBomb { get; set; }
+	public float timer { get; set; }
+	public MovementData moveData { get; set; }
 
 	public void BombInput()
 	{
@@ -153,8 +172,29 @@ public class PlayerInput : IInput
 
 	public void MoveInput()
 	{
-		moveX = (int)Input.GetAxisRaw("Horizontal");
-		moveY = (int)Input.GetAxisRaw("Vertical");
+		// if (Input.GetButtonDown("Horizontal"))
+		// 	moveX = Input.GetAxisRaw("Horizontal");
+		//  else
+		//  moveX = 0;
+
+		// if (Input.GetButtonDown("Vertical"))
+		// 	moveY = Input.GetAxisRaw("Vertical");
+		// else
+		// 	moveY = 0;
+
+
+		if (timer < moveData.cooldown)
+		{
+			timer += Time.deltaTime;
+			moveX = 0;
+			moveY = 0;
+		}
+		else
+		{
+			timer = 0;
+			moveX = Input.GetAxisRaw("Horizontal");
+			moveY = Input.GetAxisRaw("Vertical");
+		}
 	}
 }
 

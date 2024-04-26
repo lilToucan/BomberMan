@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public ActionBool PlayerDeath;
-	public ActionBool EnemyDeath;
-	public ActionBool EnemySpawn;
+	public ActionBool PlayerDeath; // really just to test if it could be done 
+	public static Action EnemyDeath;
+	public static Action EnemySpawn;
 
 
 	[SerializeField] int LoseSceneNum;
@@ -17,9 +18,8 @@ public class GameManager : MonoBehaviour
 	private void OnEnable()
 	{
 		PlayerDeath.onActivation += Lose;
-		EnemyDeath.onActivation += EnemyKilled;
-		EnemySpawn.onActivation += OnEnemySpawn;
-		EnemySpawn.onActivation?.Invoke(true);
+		EnemyDeath += EnemyKilled;
+		EnemySpawn += OnEnemySpawn;
 	}
 
 
@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene(LoseSceneNum);
 	}
 
-	void OnEnemySpawn(bool x)
+	void OnEnemySpawn()
 	{
 		EnemiesToKill++;
 	}
 
-	void EnemyKilled(bool x)
+	void EnemyKilled()
 	{
 		EnemiesKilled++;
 		if (EnemiesKilled >= EnemiesToKill)

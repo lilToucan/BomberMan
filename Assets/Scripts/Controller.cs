@@ -8,7 +8,6 @@ public class Controller : MonoBehaviour
 	public BombData bombData;
 	public IInput input;
 	public Mover mover;
-	public Bomber bomber;
 
 	public string MoveAnim;
 	public SpriteRenderer myRenderer;
@@ -17,39 +16,33 @@ public class Controller : MonoBehaviour
 	private void Awake()
 	{
 		input = moveData.isAi ? new AiInput(bombData.chance) : new PlayerInput();
+		input.canBomb = true;
 		mover = new Mover(input, moveData, transform, MoveAnim, myRenderer, myAnim);
-		bomber = new Bomber(input);
 	}
 
-	private void OnEnable()
-	{
-		bomber.onDroppingBomb += OnBomb;
-	}
-	private void OnDisable()
-	{
-		bomber.onDroppingBomb -= OnBomb;
-	}
 
 	private void Update()
 	{
 		input.MoveInput();
-		input.BombInput();
+		input.BombInput(this);
 
 		mover.Tick();
-		bomber.Tick();
 	}
 
-	void OnBomb()
+	public void OnBomb()
 	{
-		Instantiate(bombData.bomb, transform.position, quaternion.identity);
-		StartCoroutine(BombCooldown());
+		if (input.canBomb)
+		{
+			Instantiate(bombData.bomb, transform.position, quaternion.identity);
+			StartCoroutine(BombCooldown());
+		}
 	}
 
 	IEnumerator BombCooldown()
 	{
-		bomber.canBomb = false;
+		input.canBomb = false;
 		yield return new WaitForSeconds(bombData.cooldown);
-		bomber.canBomb = true;
+		input.canBomb = true;
 	}
 
 }

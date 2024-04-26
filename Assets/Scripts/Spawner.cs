@@ -1,19 +1,16 @@
-using Unity.Mathematics;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
 public class Spawner : MonoBehaviour
 {
-	public ActionBool enemiesSpawn;
 	public Transform enemy;
 
-	private void Awake()
+	private void Start()
 	{
-		enemiesSpawn.onActivation += SpawnForTimes;
+		Spawn();
 	}
 
-	private void SpawnForTimes(bool Times)
+	private void Spawn()
 	{
+		GameManager.EnemySpawn?.Invoke();
 		Instantiate(enemy, transform.position, Quaternion.identity);
 	}
 }

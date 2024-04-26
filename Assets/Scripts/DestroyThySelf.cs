@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class DestroyThySelf : MonoBehaviour, IHp
 {
-    public void Death()
-    {
-        gameObject.SetActive(false);
-    }
+	[SerializeField] ActionBool PlayerDeath;
+	public void Death()
+	{
+		gameObject.SetActive(false);
+	}
 
-    public void TakeDmg()
-    {
-        Death();
-    }
+	public void TakeDmg()
+	{
+		if (PlayerDeath)
+		{
+
+			PlayerDeath.onActivation?.Invoke(true);
+		}
+
+		Death();
+	}
 }

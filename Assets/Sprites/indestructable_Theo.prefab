@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8359824701863704403}
   - component: {fileID: 5707446294065771803}
   - component: {fileID: 7709581680573765315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: indestructable_Theo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce44074493383e4ebc54147002bb66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDeath: {fileID: 0}

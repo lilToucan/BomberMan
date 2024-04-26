@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9860811a3efbf0740939547168cd74cb, type: 3}
   m_Name: EnemyBombData
   m_EditorClassIdentifier: 
-  cooldown: 0
-  bombTimer: 0
-  rangeX: 0
-  rangeY: 0
-  pullData: {fileID: 11400000, guid: 1176526dbb0fa7f44a3ec1e373ee5681, type: 2}
+  cooldown: 7
+  bombTimer: 4
+  rangeX: 1
+  rangeY: 1
+  bomb: {fileID: 725663252738505618, guid: 37edc37b5189c4d4b9743718b55e8f51, type: 3}
+  bombAction: {fileID: 11400000, guid: 1176526dbb0fa7f44a3ec1e373ee5681, type: 2}
   doNotHit:
     serializedVersion: 2
-    m_Bits: 1536
-  chance: 0.1
+    m_Bits: 1664
+  chance: 0.01

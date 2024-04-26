@@ -8,7 +8,7 @@ public class BombData : ScriptableObject
 	public float bombTimer;
 	public int rangeX;
 	public int rangeY;
-	public GameObject bomb { get; set; }
+	public GameObject bomb;
 	public BombAction bombAction;
 	public LayerMask doNotHit;
 

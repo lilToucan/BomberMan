@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec86ee53eb8b244b85e99c02ed113af, type: 3}
   m_Name: EnemyBombAction
   m_EditorClassIdentifier: 
-  Bomb: {fileID: 0}
+  Bomb: {fileID: 725663252738505618, guid: 37edc37b5189c4d4b9743718b55e8f51, type: 3}

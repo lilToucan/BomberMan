@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2243743421560110454, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243743421560110454, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: m_Color.g
+      value: 0.56331223
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243743421560110454, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: m_Color.r
+      value: 0.504717
+      objectReference: {fileID: 0}
     - target: {fileID: 3280979546183723559, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -48,12 +60,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: scale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: myAnim
+      value: 
+      objectReference: {fileID: 2336702180495477634}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: bombData
+      value: 
+      objectReference: {fileID: 11400000, guid: 680f5c64a93cbe1468f5277e37b2cb75, type: 2}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: frequency
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: explosionAnim
+      value: EXPLOSION
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777155165160703024, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: whereToAnimate
+      value: 
+      objectReference: {fileID: 471115552812407317, guid: 7c6bf9b9b7c350b41af16fe9d77b4863, type: 3}
     - target: {fileID: 8533363503605523997, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
       propertyPath: m_Name
-      value: Bomb
+      value: Bomb Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533363503605523997, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+--- !u!95 &2336702180495477634 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6634690963936155149, guid: b2f534dbd04a122478b0f7df66595684, type: 3}
+  m_PrefabInstance: {fileID: 8970759271070883215}
+  m_PrefabAsset: {fileID: 0}

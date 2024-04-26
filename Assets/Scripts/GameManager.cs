@@ -13,13 +13,20 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int WinSceneNum;
 
 	int EnemiesKilled = 0;
-	public int EnemiesToKill = 0;
+	int EnemiesToKill = 0;
 
 	private void OnEnable()
 	{
 		PlayerDeath.onActivation += Lose;
 		EnemyDeath += EnemyKilled;
 		EnemySpawn += OnEnemySpawn;
+	}
+
+	private void OnDisable()
+	{
+		PlayerDeath.onActivation -= Lose;
+		EnemyDeath -= EnemyKilled;
+		EnemySpawn -= OnEnemySpawn;
 	}
 
 
@@ -30,12 +37,14 @@ public class GameManager : MonoBehaviour
 
 	void OnEnemySpawn()
 	{
+		Debug.Log("enemyLive");
 		EnemiesToKill++;
 	}
 
 	void EnemyKilled()
 	{
 		EnemiesKilled++;
+
 		if (EnemiesKilled >= EnemiesToKill)
 		{
 			Win();
